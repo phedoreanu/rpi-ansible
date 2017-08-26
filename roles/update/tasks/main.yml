@@ -1,0 +1,17 @@
+- name: Set authorized key from GitHub
+  authorized_key:
+    user: alarm
+    state: present
+    key: https://github.com/phedoreanu.keys
+
+- name: Update, upgrade & install
+  command: |
+    pacman -Syu --noconfirm --needed
+      base-devel bash-completion
+      raspberrypi-firmware
+      vim wget htop
+  become: true
+
+- name: Set UK Timezone
+  command: timedatectl set-timezone Europe/London
+  become: true
