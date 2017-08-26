@@ -1,0 +1,15 @@
+- name: Copy wpa_supplicant-wlan0.conf
+  copy:
+    src: wpa_supplicant-wlan0.conf
+    dest: /etc/wpa_supplicant/
+  become: true
+
+- name: Enable wpa_supplicant@wlan0
+  command: systemctl enable wpa_supplicant@wlan0
+  become: true
+
+- name: Copy wlan0.network
+  copy:
+    src: wlan0.network
+    dest: /etc/systemd/network/
+  become: true
