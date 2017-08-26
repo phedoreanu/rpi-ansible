@@ -3,3 +3,5 @@
   roles:
   - update
   - wifi
+  - io
+  - reboot

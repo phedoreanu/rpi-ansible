@@ -1,0 +1,21 @@
+- name: Install necesarry packages
+  command: pacman -S --noconfirm --needed i2c-tools lm_sensors
+  become: true
+
+- name: Enable SPI and I2C
+  lineinfile:
+    path: /boot/config.txt
+    line: '{{item}}'
+  with_items:
+    - 'device_tree_param=spi=on'
+    - 'dtparam=i2c_arm=on'
+  become: true
+
+- name: Enable necesarry modules
+  lineinfile:
+    path: /etc/modules-load.d/raspberrypi.conf
+    line: '{{item}}'
+  with_items:
+    - 'i2c-bcm2708'
+    - 'i2c-dev'
+  become: true
