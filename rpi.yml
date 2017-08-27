@@ -2,6 +2,7 @@
   gather_facts: no
   roles:
   - update
+  - docker
   - wifi
-  - io
+  # - io #optional
   - reboot
