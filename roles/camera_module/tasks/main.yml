@@ -1,0 +1,25 @@
+- name: Enable Camera module
+  lineinfile:
+    path: /boot/config.txt
+    line: '{{item}}'
+  with_items:
+    - 'start_file=start_x.elf'
+    - 'fixup_file=fixup_x.dat'
+    - '#disable_camera_led=1'
+  become: true
+
+- name: Set gpu_mem to 128
+  replace:
+    path: /boot/config.txt
+    regexp: '^gpu_mem=(\d+)$'
+    replace: 'gpu_mem=128'
+  become: true
+
+- name: Enable video4linux2
+  lineinfile:
+    path: /etc/modules-load.d/rpi-camera.conf
+    line: '{{item}}'
+  with_items:
+    - 'bcm2835-v4l2'
+    - 'options bcm2835-v4l2 max_video_width=3240 max_video_height=2464'
+  become: true

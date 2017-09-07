@@ -1,0 +1,28 @@
+- name: Download package-query PKGBUILD
+  get_url:
+    url: https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=package-query
+    dest: /tmp/pqPKG
+    mode: 0440
+  register: buildPQ
+
+- name: Build and Install package-query
+  command: makepkg -is -p /tmp/pqPKG
+  args:
+    chdir: /tmp
+  when: buildPQ.changed
+
+- name: Download yaourt PKGBUILD
+  get_url:
+    url: https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=yaourt
+    dest: /tmp/yPKG
+    mode: 0440
+  register: buildY
+
+- name: Build and Install yaourt
+  command: makepkg -is -p /tmp/yPKG
+  args:
+    chdir: /tmp
+  when: buildY.changed
+
+- name: Install lib-tbb
+  command: yaourt -S --noconfirm intel-tbb --needed

@@ -4,5 +4,7 @@
   - update
   - docker
   - wifi
-  # - io #optional
+  - yaourt
+  # - camera_module # optional
+  # - io # optional
   - reboot
