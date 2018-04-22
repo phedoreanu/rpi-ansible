@@ -22,3 +22,9 @@
 
 - name: Install lib-tbb
   command: yaourt -S --noconfirm intel-tbb --needed
+
+- name: /tmp clean-up
+  file:
+    path: /tmp
+    state: absent
+  ignore_errors: yes
