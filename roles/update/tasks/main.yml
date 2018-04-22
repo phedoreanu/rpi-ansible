@@ -5,13 +5,23 @@
     key: https://github.com/phedoreanu.keys
 
 - name: Update, upgrade & install
-  command: |
-    pacman -Syu --noconfirm --needed
-      base-devel bash-completion
-      raspberrypi-firmware
-      vim wget htop
+  pacman:
+    update_cache: yes
+    upgrade: yes
   become: true
 
-- name: Set UK Timezone
-  command: timedatectl set-timezone Europe/London
+- name: Install group base-devel
+  pacman:
+    name: base-devel
+    state: present
+  become: true
+
+- name: Install stuff
+  command: |
+    pacman -Syu --noconfirm --needed --noprogressbar
+      bash-completion vim htop
+  become: true
+
+- name: Set CH Timezone
+  command: timedatectl set-timezone Europe/Zurich
   become: true
