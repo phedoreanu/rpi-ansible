@@ -1,2 +1,2 @@
 [all]
-${RPI-IP}
+${RPI_IP}
