@@ -1,2 +1,3 @@
 *.retry
 hosts
+roles/wifi/vars/main.yml

@@ -1,7 +1,6 @@
 - name: Copy wpa_supplicant-wlan0.conf
-  copy:
-    src: wpa_supplicant-wlan0.conf
-    dest: /etc/wpa_supplicant/
+  command: |
+    wpa_passphrase {{SSID}} {{PASSWD}} > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
   become: true
 
 - name: Enable wpa_supplicant@wlan0

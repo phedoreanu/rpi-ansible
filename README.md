@@ -3,16 +3,19 @@ A collection of ansible roles for bootstraping devices running ArchLinuxARM (RPI
 
 ## Manual steps on the PI
 ```bash
-$ ssh alarm@${RPI-IP}
+$ ssh alarm@${RPI_IP}
 $ su -
-$ pacman -S --noconfirm python sudo
+$ pacman -Syyu --noconfirm python sudo htop vim
 $ echo "alarm ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 $ passwd
 $ <ctrl+d>
 ```
 
 ## Hosts file
-`cp hosts.example hosts`
+`$ cp hosts.example hosts`
+
+## Wifi creds
+`$ cp roles/wifi/vars/main.yml.example roles/wifi/vars/main.yml`
 
 ## Running ansible from the host
-`ansible-playbook -i hosts rpi.yml -u alarm --ask-pass # needed only-once for the public key`
+`$ ansible-playbook -i hosts rpi.yml -u alarm --ask-pass # needed only-once for the public key`
