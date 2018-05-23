@@ -2,7 +2,7 @@
   authorized_key:
     user: alarm
     state: present
-    key: https://github.com/phedoreanu.keys
+    key: https://github.com/{{github_username}}.keys
 
 - name: Update, upgrade & install
   pacman:
@@ -16,12 +16,20 @@
     state: present
   become: true
 
-- name: Install stuff
+- name: Install bash-completion
   command: |
     pacman -Syu --noconfirm --needed --noprogressbar
-      bash-completion vim htop
+      bash-completion
   become: true
 
 - name: Set CH Timezone
   command: timedatectl set-timezone Europe/Zurich
+  become: true
+
+- name: Disable overscan
+  lineinfile:
+    path: /boot/config.txt
+    line: '{{item}}'
+  with_items:
+    - 'disable_overscan=1'
   become: true
