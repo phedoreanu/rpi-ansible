@@ -5,7 +5,7 @@ A collection of ansible roles for bootstraping devices running ArchLinuxARM (RPI
 ```bash
 $ ssh alarm@${RPI_IP}
 $ su -
-$ pacman -Syyu --noconfirm python sudo htop vim
+$ pacman -Syyu --noconfirm python sudo htop vim raspberrypi-firmware
 $ echo "alarm ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 $ passwd
 $ <ctrl+d>
