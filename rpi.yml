@@ -7,4 +7,5 @@
   - yaourt
   # - camera_module # optional
   # - io # optional
+  - lxde
   - reboot

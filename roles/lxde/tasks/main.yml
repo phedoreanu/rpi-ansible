@@ -1,0 +1,34 @@
+- name: Install LXDE
+  command: |
+    pacman -S --noconfirm --needed --noprogressbar xorg-server xf86-video-fbdev
+    librsvg ttf-dejavu lxdm lxde chromium
+  become: true
+
+- name: alarm auto-login
+  replace:
+    path: /home/alarm/.config/lxsession/LXDE/autostart
+    regexp: '^#\sautologin=(\w+)$'
+    replace: 'autologin=alarm'
+
+- name: Enable LXDM
+  command: systemctl enable lxdm.service
+  become: true
+
+- file: path=/home/alarm/opensnap state=directory
+
+- copy:
+    src: templates/PKGBUILD.opensnap
+    dest: /home/alarm/opensnap/PKGBUILD
+
+- name: Install opensnap
+  command: makepkg -is
+  args:
+    chdir: /home/alarm/opensnap
+
+- name: Start chromium on login
+  lineinfile:
+    path: /home/alarm/.config/lxsession/LXDE/autostart
+    line: '{{item}}'
+  with_items:
+    - '@opensnap -d'
+    - '@chromium'
