@@ -2,6 +2,12 @@
   pacman:
     name: docker
     state: present
+  become: true
 
-- name: Start and enable docker daemon
-  systemd: state=started name=docker
+- name: Enable docker daemon
+  command: systemctl enable docker.service
+  become: true
+
+- name: Add alarm to docker group
+  command: gpasswd -a alarm docker
+  become: true
