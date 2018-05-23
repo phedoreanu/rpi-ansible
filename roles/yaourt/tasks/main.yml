@@ -21,10 +21,10 @@
     chdir: /tmp
 
 - name: Install lib-tbb
-  command: yaourt -S --noconfirm intel-tbb --needed
+  command: yaourt -S --noconfirm --needed intel-tbb
 
 - name: /tmp clean-up
   file:
-    path: /tmp
+    path: /tmp/*
     state: absent
   ignore_errors: yes
