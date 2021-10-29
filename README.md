@@ -1,5 +1,5 @@
 # rpi-ansible
-A collection of ansible roles for bootstraping devices running ArchLinuxARM (RPI 2/3).
+A collection of ansible roles for bootstraping devices running ArchLinuxARM (RPI 3/4).
 
 ## Manual steps on the PI
 ```bash
